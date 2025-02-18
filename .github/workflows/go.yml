@@ -1,0 +1,51 @@
+name: Go build and test
+
+on:
+  push:
+    branches:
+      - '**'
+    paths:
+      - "**/*.go"
+      - "!**/*.md"
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+
+jobs:
+
+  build:
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      matrix:
+        os: [ macos-latest, ubuntu-latest, windows-latest ]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Skip duplicate actions
+        uses: fkirc/skip-duplicate-actions@v5.3.1
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+          check-latest: true
+          cache-dependency-path: go.mod
+
+      - name: Install gotestsum
+        run: |
+          go install gotest.tools/gotestsum@latest
+
+      - name: Test module
+        run: |
+          make tidy
+          make test
+
+      - name: Build application
+        run: |
+          go build -v ./...
