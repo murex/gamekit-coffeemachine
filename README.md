@@ -40,7 +40,7 @@ graph LR
     JAVA_IMPL[Implementation]
   end
 
-  subgraph cpp [C+++]
+  subgraph cpp [C++]
     CPP_RUNNER[Command Line Runner]
     CPP_FACADE[Facade]
     CPP_IMPL[Implementation]
