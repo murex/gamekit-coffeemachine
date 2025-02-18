@@ -1,0 +1,11 @@
+# Jetbrains IDEs
+**/.idea/
+# VS Code
+**/.vscode/
+
+# Build and transient files and directories
+**/bin/
+**/build/
+**/dist/
+**/_test_results/
+*.exe

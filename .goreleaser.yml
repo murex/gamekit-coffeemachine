@@ -1,0 +1,99 @@
+# This is goreleaser configuration for releasing go-progress-runner.
+# Make sure to check the documentation at http://goreleaser.com
+project_name: go-progress-runner
+before:
+  hooks:
+    - make tidy
+builds:
+  - id: "cli"
+    dir: .
+    binary: cli
+    command: build
+    no_main_check: false
+    env:
+      - CGO_ENABLED=0
+      - CONFIG_PKG=github.com/murex/coffee-machine/progress-runner/settings
+    ldflags:
+      - -s -w
+      - -X {{.Env.CONFIG_PKG}}.BuildVersion={{.Version}}
+      - -X {{.Env.CONFIG_PKG}}.BuildOs={{.Os}}
+      - -X {{.Env.CONFIG_PKG}}.BuildArch={{.Arch}}
+      - -X {{.Env.CONFIG_PKG}}.BuildCommit={{.Commit}}
+      - -X {{.Env.CONFIG_PKG}}.BuildDate={{.Date}}
+      - -X {{.Env.CONFIG_PKG}}.BuildAuthor=murex
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+  - id: "test2json"
+    main: cmd/test2json
+    binary: test2json
+    command: build
+    no_main_check: true
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+  - id: "gotestsum"
+    main: gotest.tools/gotestsum
+    binary: gotestsum
+    command: build
+    no_main_check: true
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+  - id: "progress-tests"
+    dir: ./progress
+    binary: progress-tests
+    command: test
+    no_main_check: true
+    env:
+      - CGO_ENABLED=0
+      - CONFIG_PKG=github.com/murex/coffee-machine/progress-runner/settings
+    ldflags:
+      - -s -w
+      - -X {{.Env.CONFIG_PKG}}.BuildVersion={{.Version}}
+      - -X {{.Env.CONFIG_PKG}}.BuildOs={{.Os}}
+      - -X {{.Env.CONFIG_PKG}}.BuildArch={{.Arch}}
+      - -X {{.Env.CONFIG_PKG}}.BuildCommit={{.Commit}}
+      - -X {{.Env.CONFIG_PKG}}.BuildDate={{.Date}}
+      - -X {{.Env.CONFIG_PKG}}.BuildAuthor=murex
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+archives:
+  - name_template: >-
+      {{ .ProjectName }}_
+      {{- .Version }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{.Tag}}-snapshot"
+changelog:
+  sort: asc
