@@ -88,6 +88,10 @@ endef
 run-progress: $(progress_tests_bin) $(test2json_bin) $(gotestsum_bin)
 	@$(call RUN_PROGRESS_TESTS,$(RUN_ON_LANG))
 
+.PHONY: test
+test:
+	@env RUN_ON_LANG=java gotestsum ./...
+
 .PHONY: clean
 clean:
 	@rm -f bin/*
