@@ -48,7 +48,10 @@ func sendsNotificationWhenMilkTankIsEmptyAndOrderIsChocolate() (string, func(t *
 	return assertSendsNotificationOnEmptyTank(ref.Chocolate, ref.Milk)
 }
 
-func assertSendsNotificationOnEmptyTank(drinkType ref.Drink, liquid ref.Liquid) (string, func(t *testing.T, p *process.P)) {
+func assertSendsNotificationOnEmptyTank(
+	drinkType ref.Drink,
+	liquid ref.Liquid,
+) (string, func(t *testing.T, p *process.P)) {
 	return fmt.Sprintf("sends notification when asking for a %s and %s tank is empty", drinkType.Name, liquid),
 		func(t *testing.T, p *process.P) {
 			_, err := p.SendMessage(process.NewSetTankMessage(liquid, ref.Empty))
@@ -75,7 +78,10 @@ func sendsNoNotificationWhenWaterTankIsFull() (string, func(t *testing.T, p *pro
 	return assertSendsNoNotificationOnFullTank(ref.Coffee, ref.Water)
 }
 
-func assertSendsNoNotificationOnFullTank(drinkType ref.Drink, liquid ref.Liquid) (string, func(t *testing.T, p *process.P)) {
+func assertSendsNoNotificationOnFullTank(
+	drinkType ref.Drink,
+	liquid ref.Liquid,
+) (string, func(t *testing.T, p *process.P)) {
 	return fmt.Sprintf("sends no notification when asking for a %s and %s tank is full", drinkType.Name, liquid),
 		func(t *testing.T, p *process.P) {
 			_, err := p.SendMessage(process.NewSetTankMessage(liquid, ref.Full))

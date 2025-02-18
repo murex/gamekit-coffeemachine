@@ -22,8 +22,10 @@ SOFTWARE.
 
 package ref
 
+// TankStatus represents the status of a liquid tank
 type TankStatus string
 
+// List of possible values for a liquid tank status
 const (
 	Full  TankStatus = "full"
 	Empty TankStatus = "empty"

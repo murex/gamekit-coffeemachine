@@ -43,7 +43,7 @@ var (
 	stdoutLog = log.New(os.Stderr, "< ", 0)
 )
 
-var timeoutError = fmt.Errorf("timeout while reading response from coffee machine")
+var errTimeout = fmt.Errorf("timeout while reading response from coffee machine")
 
 // LanguageEnvKey is the environment variable key used to specify the language implementation to run
 const LanguageEnvKey = "RUN_ON_LANG"
@@ -169,13 +169,13 @@ func (p *P) scanResponse(scannerFunc func(scanner *bufio.Scanner) string) (strin
 			return "", errScanner
 		}
 	case <-timeoutCtx.Done():
-		errorLog.Println(timeoutError)
+		errorLog.Println(errTimeout)
 		errKill := p.cmd.Process.Signal(os.Kill)
 		if errKill != nil {
 			errorLog.Println(errKill)
 			return "", errKill
 		}
-		return "", timeoutError
+		return "", errTimeout
 	}
 	return response, nil
 }
@@ -193,8 +193,8 @@ func scanMultipleLines(scanner *bufio.Scanner, endMarker string) string {
 			break
 		}
 		stdoutLog.Println(scanner.Text())
-		outBuffer.WriteString(scanner.Text())
-		outBuffer.WriteRune('\n')
+		_, _ = outBuffer.WriteString(scanner.Text())
+		_, _ = outBuffer.WriteRune('\n')
 	}
 	return strings.TrimSpace(outBuffer.String())
 }

@@ -22,6 +22,7 @@ SOFTWARE.
 
 package ref
 
+// Drink represents a drink that can be served by the coffee machine
 type Drink struct {
 	Name          string
 	Price         float64
@@ -29,6 +30,7 @@ type Drink struct {
 	ReportKeyword string
 }
 
+// List of drinks that can be served by the coffee machine
 var (
 	Coffee      = Drink{Name: "coffee", Price: 0.60, CommandCode: "C", ReportKeyword: "coffee"}
 	Tea         = Drink{Name: "tea", Price: 0.40, CommandCode: "T", ReportKeyword: "tea"}
@@ -36,4 +38,5 @@ var (
 	OrangeJuice = Drink{Name: "orange-juice", Price: 0.60, CommandCode: "O", ReportKeyword: "orange"}
 )
 
+// ExtraHotCommandFlag is the command flag to indicate that the drink should be served extra hot
 const ExtraHotCommandFlag = "h"

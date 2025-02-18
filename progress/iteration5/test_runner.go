@@ -76,7 +76,11 @@ func assertDrinkIsNotServed(t *testing.T, p *process.P, drink ref.Drink) {
 	iteration.AssertDrinkIsNotServed(t, drink, cmd, err)
 }
 
-func assertDrinkCanBeServed(drinkType ref.Drink, liquid ref.Liquid, tankStatus ref.TankStatus) (string, func(t *testing.T, p *process.P)) {
+func assertDrinkCanBeServed(
+	drinkType ref.Drink,
+	liquid ref.Liquid,
+	tankStatus ref.TankStatus,
+) (string, func(t *testing.T, p *process.P)) {
 	return fmt.Sprintf("%s can be served when the %s tank is %s", drinkType.Name, liquid, tankStatus),
 		func(t *testing.T, p *process.P) {
 			_, err := p.SendMessage(process.NewSetTankMessage(liquid, tankStatus))
@@ -85,7 +89,11 @@ func assertDrinkCanBeServed(drinkType ref.Drink, liquid ref.Liquid, tankStatus r
 		}
 }
 
-func assertDrinkCanNotBeServed(drinkType ref.Drink, liquid ref.Liquid, tankStatus ref.TankStatus) (string, func(t *testing.T, p *process.P)) {
+func assertDrinkCanNotBeServed(
+	drinkType ref.Drink,
+	liquid ref.Liquid,
+	tankStatus ref.TankStatus, // nolint: unparam
+) (string, func(t *testing.T, p *process.P)) {
 	return fmt.Sprintf("%s can not be served when the %s tank is %s", drinkType.Name, liquid, tankStatus),
 		func(t *testing.T, p *process.P) {
 			_, err := p.SendMessage(process.NewSetTankMessage(liquid, tankStatus))

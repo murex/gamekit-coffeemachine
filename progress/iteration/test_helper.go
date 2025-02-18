@@ -30,6 +30,7 @@ import (
 	"testing"
 )
 
+// AssertDrinkIsServed is a helper function asserting that a drink is served
 func AssertDrinkIsServed(t *testing.T, drink ref.Drink, response string, err error) {
 	t.Helper()
 	require.NoError(t, err)
@@ -39,6 +40,7 @@ func AssertDrinkIsServed(t *testing.T, drink ref.Drink, response string, err err
 		drink.Name, drink.CommandCode)
 }
 
+// AssertDrinkIsNotServed is a helper function asserting that a drink is not served
 func AssertDrinkIsNotServed(t *testing.T, drink ref.Drink, response string, err error) {
 	t.Helper()
 	require.NoError(t, err)

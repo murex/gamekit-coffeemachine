@@ -27,10 +27,11 @@ import (
 	"math"
 )
 
-func eurosAndCents(amount float64) (int, int) {
-	euros := math.Floor(amount)
-	cents := math.Round((amount - euros) * 100)
-	return int(euros), int(cents)
+func eurosAndCents(amount float64) (euros int, cents int) {
+	e := math.Floor(amount)
+	c := math.Round((amount - e) * 100)
+	euros, cents = int(e), int(c)
+	return euros, cents
 }
 
 // AmountRegexp returns a locale agnostic regular expression that matches the

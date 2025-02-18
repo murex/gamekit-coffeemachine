@@ -19,6 +19,8 @@ var (
 	stdoutLog = log.New(os.Stderr, "⏪ ", 0)
 )
 
+// main is the entry point of the coffee machine command line runner
+// nolint: revive
 func main() {
 	if len(os.Args) < 2 {
 		errorLog.Fatalf("syntax: %s <language>", path.Base(os.Args[0]))

@@ -22,8 +22,10 @@ SOFTWARE.
 
 package ref
 
+// Liquid represents a liquid required to make a drink
 type Liquid string
 
+// List of possible values for a liquid
 const (
 	Water Liquid = "water"
 	Milk  Liquid = "milk"

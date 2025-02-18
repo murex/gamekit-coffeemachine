@@ -45,6 +45,7 @@ func New() iteration.TestRunner {
 	)
 }
 
+// nolint: revive
 func runBuildDrinkMakerCommand(p *process.P, drink ref.Drink, sugars int, payment float64, extraHot bool) (string, error) {
 	return p.SendMessage(process.NewMakeDrinkMessage(drink.Name, sugars, payment, extraHot))
 }
