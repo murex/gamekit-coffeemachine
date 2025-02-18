@@ -1,6 +1,6 @@
 # This is goreleaser configuration for releasing go-progress-runner.
 # Make sure to check the documentation at http://goreleaser.com
-project_name: go-progress-runner
+project_name: progress-runner
 before:
   hooks:
     - make tidy
