@@ -107,11 +107,11 @@ The parts remaining to be implemented by kata participants are
 ## TODO
 
 - [ ] Add a diagram with the 2 repositories
-- [ ] Add instructions on how to run the tools
-- [ ] Move protocol details to a separate page
+- [x] Add instructions on how to run the tools
+- [x] Move protocol details to a separate page
 - [ ] Add instructions on how to implement the facade in a new language
-- [ ] Add development instructions
-- [ ] Migrate this repository to murex (public)
+- [x] Add development instructions
+- [x] Migrate this repository to murex (public)
 
 ## Building, testing and releasing coaching helpers for the coffee machine kata
 
