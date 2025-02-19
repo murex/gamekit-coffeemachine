@@ -2,7 +2,7 @@
 
 This repository contains a set of tools allowing to interact with coffee machine kata implementations.
 
-These tools are can be executed against coffee machine kata implementation in any language,
+These tools are designed so that they can be executed against any language implementation of the coffee machine kata,
 as long as a command line runner and a facade are available in this language.
 
 ## Available Tools
@@ -196,3 +196,12 @@ This command asks the coffee machine to dump its mailbox contents.
 << ...
 << "END-OF-MAILBOX" + EOL
 ```
+
+## TODO
+
+- [ ] Add a diagram with the 2 repositories
+- [ ] Add instructions on how to run the tools
+- [ ] Move protocol details to a separate page
+- [ ] Add instructions on how to implement the facade in a new language
+- [ ] Add development instructions
+- [ ] Migrate this repository to murex (public)
