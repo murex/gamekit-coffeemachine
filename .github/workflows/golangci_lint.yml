@@ -23,7 +23,7 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
           check-latest: true
-          cache-dependency-path: src/go.mod
+          cache-dependency-path: go.mod
 
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v6
@@ -32,7 +32,7 @@ jobs:
           # without patch version: we always use the latest patch version.
           version: v1.64
           # Optional: working directory, useful for mono-repos
-          working-directory: src
+          working-directory: .
 
           # Optional: golangci-lint command line arguments.
           args: --build-tags=test_helper
