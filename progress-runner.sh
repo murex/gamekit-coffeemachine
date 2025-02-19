@@ -2,9 +2,9 @@
 
 base_dir="$(cd "$(dirname -- "$0")" && pwd)"
 
-language="$1"
-if [ -z "$language" ]; then
-  echo "Usage: $0 <language>"
+path_to_implementation="$1"
+if [ -z "${path_to_implementation}" ]; then
+  echo "Usage: $0 <path to implementation>"
   exit 1
 fi
 
@@ -29,9 +29,11 @@ else
 fi
 
 # 2) Run progress tests through gotestsum
+# Assumption: the last directory in the path is the language name
+language=$(basename "${path_to_implementation}")
 echo "running progress tests against ${language} implementation of Coffee Machine"
 
-export RUN_ON_LANG="${language}"
+export LANG_IMPL_PATH="${path_to_implementation}"
 
 mkdir -p _test_results
 

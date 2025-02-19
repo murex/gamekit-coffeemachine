@@ -30,7 +30,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
-	"path"
+	"path/filepath"
 	"strings"
 	"time"
 )
@@ -45,8 +45,8 @@ var (
 
 var errTimeout = fmt.Errorf("timeout while reading response from coffee machine")
 
-// LanguageEnvKey is the environment variable key used to specify the language implementation to run
-const LanguageEnvKey = "RUN_ON_LANG"
+// LangImplPathKey is the environment variable key used to specify the path to the language implementation to run
+const LangImplPathKey = "LANG_IMPL_PATH"
 
 const responseTimeout = 5 * time.Second
 
@@ -72,18 +72,19 @@ type P struct {
 func NewCoffeeMachineProcess() (*P, error) {
 	infoLog.Println("creating Coffee Machine Process")
 
-	language := os.Getenv(LanguageEnvKey)
-	if language == "" {
-		errorEnv := fmt.Errorf("%s environment variable is not set", LanguageEnvKey)
+	langImplPath := os.Getenv(LangImplPathKey)
+
+	if langImplPath == "" {
+		errorEnv := fmt.Errorf("%s environment variable is not set", LangImplPathKey)
 		errorLog.Println(errorEnv.Error())
 		return nil, errorEnv
 	}
+
+	language := filepath.Base(langImplPath)
 	infoLog.Println("running", language, "implementation of coffee machine")
 
 	cmd := exec.Command("bash", "-c", "./run.sh")
-	// TODO clarify approach to set and use command running directory
-	//cmd := exec.Command("pwd", "-L")
-	cmd.Dir = path.Join("..", language)
+	cmd.Dir = langImplPath
 
 	stdin, errStdinPipe := cmd.StdinPipe()
 	if errStdinPipe != nil {

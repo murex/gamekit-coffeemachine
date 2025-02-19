@@ -5,13 +5,17 @@ else
 endif
 
 # Run with java by default when environment variable is not set
-RUN_ON_LANG ?= java
+LANG_IMPL_PATH ?= java
 
 CONFIG_PKG="github.com/murex/coffee-machine/progress-runner/settings"
 export CGO_ENABLED=0
 
 .PHONY: default
 default: build ;
+
+# Convenience target for automating release preparation
+.PHONY: prepare
+prepare: deps install-tools tidy lint build test
 
 .PHONY: deps
 deps:
@@ -46,7 +50,7 @@ $(cli_bin):
 
 .PHONY: run-cli
 run-cli: $(cli_bin)
-	@$< $(RUN_ON_LANG)
+	@$< $(LANG_IMPL_PATH)
 
 progress_tests_bin := bin/progress-tests$(EXT)
 build: $(progress_tests_bin)
@@ -76,21 +80,23 @@ $(test2json_bin):
 
 define RUN_PROGRESS_TESTS
 mkdir -p _test_results
-env RUN_ON_LANG=$(1) $(gotestsum_bin) \
+export LANG_IMPL_PATH=$(1)
+export LANGUAGE=$(basename $(1))
+$(gotestsum_bin) \
   --format testdox \
-  --junitfile _test_results/progress-tests-$(1).xml \
+  --junitfile _test_results/progress-tests-$(LANGUAGE).xml \
   --hide-summary=all \
   --raw-command \
-  -- $(test2json_bin) -t -p progress-tests-$(1) bin/progress-tests$(EXT) -test.v=test2json
+  -- $(test2json_bin) -t -p progress-tests-$(LANGUAGE) bin/progress-tests$(EXT) -test.v=test2json
 endef
 
 .PHONY: run-progress
 run-progress: $(progress_tests_bin) $(test2json_bin) $(gotestsum_bin)
-	@$(call RUN_PROGRESS_TESTS,$(RUN_ON_LANG))
+	@$(call RUN_PROGRESS_TESTS,$(LANG_IMPL_PATH))
 
 .PHONY: test
 test:
-	@env RUN_ON_LANG=java gotestsum ./...
+	@env LANG_IMPL_PATH=java gotestsum ./...
 
 .PHONY: clean
 clean:

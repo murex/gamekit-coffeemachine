@@ -33,28 +33,28 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test_process_init_should_fail_when_run_on_lang_environment_variable_is_not_set(t *testing.T) {
-	_ = os.Unsetenv(LanguageEnvKey)
+func Test_process_init_should_fail_when_lang_impl_path_environment_variable_is_not_set(t *testing.T) {
+	_ = os.Unsetenv(LangImplPathKey)
 	p, err := NewCoffeeMachineProcess()
 	assert.Nil(t, p)
 	assert.Error(t, err)
 }
 
-func Test_process_init_should_fail_when_run_on_lang_environment_variable_is_set_but_empty(t *testing.T) {
+func Test_process_init_should_fail_when_lang_impl_path_environment_variable_is_set_but_empty(t *testing.T) {
 	t.Cleanup(func() {
-		_ = os.Unsetenv(LanguageEnvKey)
+		_ = os.Unsetenv(LangImplPathKey)
 	})
-	_ = os.Setenv(LanguageEnvKey, "")
+	_ = os.Setenv(LangImplPathKey, "")
 	p, err := NewCoffeeMachineProcess()
 	assert.Nil(t, p)
 	assert.Error(t, err)
 }
 
-func Test_process_init_should_pass_when_run_on_lang_environment_variable_is_set(t *testing.T) {
+func Test_process_init_should_pass_when_lang_impl_path_environment_variable_is_set(t *testing.T) {
 	t.Cleanup(func() {
-		_ = os.Unsetenv(LanguageEnvKey)
+		_ = os.Unsetenv(LangImplPathKey)
 	})
-	_ = os.Setenv(LanguageEnvKey, "my-language")
+	_ = os.Setenv(LangImplPathKey, "path/to/language/implementation")
 	p, err := NewCoffeeMachineProcess()
 	assert.NotNil(t, p)
 	assert.NoError(t, err)
@@ -79,9 +79,9 @@ func Test_scan_multiline_response(t *testing.T) {
 
 func Test_run_and_message_smoke_test(t *testing.T) {
 	t.Cleanup(func() {
-		_ = os.Unsetenv(LanguageEnvKey)
+		_ = os.Unsetenv(LangImplPathKey)
 	})
-	_ = os.Setenv(LanguageEnvKey, "dummy")
+	_ = os.Setenv(LangImplPathKey, "dummy")
 	p, err := NewCoffeeMachineProcess()
 	require.NoError(t, err)
 

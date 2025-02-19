@@ -1,79 +1,88 @@
-# Test tools for the coffee machine kata
+# Gamification kit for the coffee machine kata
 
-This repository contains a set of tools allowing to interact with coffee machine kata implementations.
+This repository provides items focused on gamifying the coffee machine kata.
 
-These tools are designed so that they can be executed against any language implementation of the coffee machine kata,
-as long as a command line runner and a facade are available in this language.
+These items are by design "programming language agnostic",
+e.g. they may be used with the coffee machine kata in any language.
 
-## Available Tools
+## Available Gamification Tools
 
 ### Progress Runner
 
 This tool allows to test the progress of a kata implementation.
 
-Tests are black box tests. They are organized per iteration.
+Tests that are run by the progress runner are "black box" tests.
 
-### Command line interface
+Their order of execution follows the iterations described in the kata.
 
-This tool allow to interact with a kata implementation, through sending commands and displaying the response
-sent by the implementation.
+### Command Line Interface utility
+
+This tool allows to interact with a kata implementation from a terminal,
+through sending commands and displaying the response sent by the implementation.
+
+This a low-level tool which main purpose is to help tune the communication protocol
+bootstrap files when adding support for a new programming language.
+
+It's not intended to be used directly by kata participants.
 
 ## Overall Architecture
 
+Both the Progress Runner and the Command Line Interface utility are built
+on top of a common text protocol.
+Refer to [Inter-Process Text Protocol](./dev-doc/inter-process-text-protocol.md) for further details.
+
 ```mermaid
 graph LR
-  subgraph runner [Progress Runner]
-    PROGRESS_RUNNER[Progress Runner]
-    CLI_DRIVER_1[Command Line Driver]
-  end
+    subgraph runner [Progress Runner]
+        PROGRESS_RUNNER(Progress<br>Runner)
+        CLI_DRIVER_1(Command Line<br>Driver)
+    end
 
-  subgraph cli [Command Line Interface Runner]
-    CLI_RUNNER[CLI Runner]
-    CLI_DRIVER_2[Command Line Driver]
-  end
+    subgraph cli [Command Line Interface Utility]
+        CLI_RUNNER(CLI<br>Runner)
+        CLI_DRIVER_2(Command Line<br>Driver)
+    end
 
-  PROTOCOL(("Text<br>Protocol"))
+    PROTOCOL{{"Inter-Process<br>Text<br>Protocol"}}
 
-  subgraph java [Java]
-    JAVA_RUNNER[Command Line Runner]
-    JAVA_FACADE[Facade]
-    JAVA_IMPL[Implementation]
-  end
+    subgraph java [Java]
+        JAVA_RUNNER(Command Line<br>Runner)
+        JAVA_FACADE(Facade)
+        JAVA_IMPL(Implementation)
+    end
 
-  subgraph cpp [C++]
-    CPP_RUNNER[Command Line Runner]
-    CPP_FACADE[Facade]
-    CPP_IMPL[Implementation]
-  end
+    subgraph cpp [C++]
+        CPP_RUNNER(Command Line<br>Runner)
+        CPP_FACADE(Facade)
+        CPP_IMPL(Implementation)
+    end
 
-  subgraph python [Python]
-    PYTHON_RUNNER[Command Line Runner]
-    PYTHON_FACADE[Facade]
-    PYTHON_IMPL[Implementation]
-  end
+    subgraph python [Python]
+        PYTHON_RUNNER(Command Line<br>Runner)
+        PYTHON_FACADE(Facade)
+        PYTHON_IMPL(Implementation)
+    end
 
-  PROGRESS_RUNNER --> CLI_DRIVER_1 --> PROTOCOL
-  CLI_RUNNER --> CLI_DRIVER_2 --> PROTOCOL
-  PROTOCOL --> JAVA_RUNNER --> JAVA_FACADE --> JAVA_IMPL
-  PROTOCOL --> CPP_RUNNER --> CPP_FACADE --> CPP_IMPL
-  PROTOCOL --> PYTHON_RUNNER --> PYTHON_FACADE --> PYTHON_IMPL
-  
-  classDef testModule fill:#36c;
-  classDef implModule fill:#693;
-  
-  class PROGRESS_RUNNER testModule
-  class CLI_DRIVER_1 testModule
-  class CLI_RUNNER testModule
-  class CLI_DRIVER_2 testModule
-  class JAVA_RUNNER testModule
-  class JAVA_FACADE testModule
-  class JAVA_IMPL implModule
-  class CPP_RUNNER testModule
-  class CPP_FACADE testModule
-  class CPP_IMPL implModule
-  class PYTHON_RUNNER testModule
-  class PYTHON_FACADE testModule
-  class PYTHON_IMPL implModule
+    PROGRESS_RUNNER --> CLI_DRIVER_1 --> PROTOCOL
+    CLI_RUNNER --> CLI_DRIVER_2 --> PROTOCOL
+    PROTOCOL --> JAVA_RUNNER --> JAVA_FACADE --> JAVA_IMPL
+    PROTOCOL --> CPP_RUNNER --> CPP_FACADE --> CPP_IMPL
+    PROTOCOL --> PYTHON_RUNNER --> PYTHON_FACADE --> PYTHON_IMPL
+    classDef testModule fill:#369;
+    classDef implModule fill:#693;
+    class PROGRESS_RUNNER testModule;
+    class CLI_DRIVER_1 testModule;
+    class CLI_RUNNER testModule;
+    class CLI_DRIVER_2 testModule;
+    class JAVA_RUNNER testModule;
+    class JAVA_FACADE testModule;
+    class JAVA_IMPL implModule;
+    class CPP_RUNNER testModule;
+    class CPP_FACADE testModule;
+    class CPP_IMPL implModule;
+    class PYTHON_RUNNER testModule;
+    class PYTHON_FACADE testModule;
+    class PYTHON_IMPL implModule;
 ```
 
 ## Repository Breakdown
@@ -95,108 +104,6 @@ The parts remaining to be implemented by kata participants are
 - the actual implementation of kata.
 - the facade implementation, wiring the implementation to the command line runner.
 
-## Inter Process Text Protocol
-
-Communication between the Runner and the Implementation is done through a simple inter-process text protocol.
-
-When the runner process is started:
-
-- It spawns a new process calling the command line runner in the chosen language implementation.
-- Its stdout is wired to the stdin of the command line runner (and vice versa).
-- Request commands are sent by the runner to the command line runner through the stdin of the command line runner.
-- Responses are received by the Runner through its stdin.
-- Communication ends when the stdin of the command line runner is closed, an EOF is sent to it, or a shutdown
-  message is sent to it.
-
-### Global messages
-
-These messages are generic and can be used with any kata.
-
-#### Retrieving implementation iteration
-
-The purpose of this message is to retrieve the current iteration of the implementation.
-This provides a way to skip requests that are not implemented yet.
-
-```text
->> iteration
-<< [iteration number] + EOL
-```
-
-#### Restarting the implementation
-
-The purpose of this message is to restart the implementation to an initial state while keeping
-the command line runner process alive. This allows in particular to keep
-the communication channel between the runner and the command line runner.
-
-```text
->> restart
-<< [any response] + EOL
-```
-
-#### Shutting down the implementation
-
-The purpose of this message is to shut down the command line runner process and as a consequence
-the implementation. No further communication is possible after this message.
-
-```text
->> shutdown
-<< [any response] + EOL
-```
-
-### Coffee Machine specific messages
-
-These messages are specific to the coffee machine kata.
-
-#### Making a drink (iteration 1 and next)
-
-This command asks the coffee machine logic to build a drink instruction.
-
-```text
->> make-drink [drink-name] [sugars] [money] [extra-hot]
-<< [drink-instruction] + EOL
-```
-
-- [drink-name] is the name of the drink to be made ("tea", "coffee", "chocolate", "orange-juice").
-- [sugars] is the number of sugars to be added to the drink (0 or a positive integer).
-- [money] is the amount of money paid for the drink (0 or a positive float value).
-- [extra-hot] is a flag indicating if the drink should be extra hot ("true" or "false").
-
-#### Printing a report (iteration 3 and next)
-
-This command asks the coffee machine logic to print a report.
-
-```text
->> print-report
-<< [report line 1] + EOL
-<< [report line 2] + EOL
-<< ...
-<< "END-OF-REPORT" + EOL
-```
-
-#### Setting a liquid tank state (iteration 5)
-
-This command asks the coffee machine to set the state of a liquid tank.
-
-```text
->> set-tank [liquid-name] [state]
-<< [any response] + EOL
-```
-
-- [liquid-name] is the name of the liquid tank to be set ("water", "milk").
-- [state] is the status of the liquid tank ("empty", "full").
-
-#### Dumping the mailbox contents (iteration 5)
-
-This command asks the coffee machine to dump its mailbox contents.
-
-```text
->> dump-mailbox
-<< [message 1] + EOL
-<< [message 2] + EOL
-<< ...
-<< "END-OF-MAILBOX" + EOL
-```
-
 ## TODO
 
 - [ ] Add a diagram with the 2 repositories
@@ -205,3 +112,20 @@ This command asks the coffee machine to dump its mailbox contents.
 - [ ] Add instructions on how to implement the facade in a new language
 - [ ] Add development instructions
 - [ ] Migrate this repository to murex (public)
+
+## Building, testing and releasing coaching helpers for the coffee machine kata
+
+Refer to [development documentation](./dev-doc/README.md) for details.
+
+## How to Contribute?
+
+These tools are still at an early stage of development,
+and there are plenty of features that we would like to add in the future.
+
+Refer to [CONTRIBUTING.md](./CONTRIBUTING.md) for general contribution agreement and guidelines.
+
+## License
+
+Contents from this repository are made available under the terms of the [MIT License](LICENSE.md)
+which accompanies this distribution, and is available at the
+[Open Source site](https://opensource.org/licenses/MIT).
