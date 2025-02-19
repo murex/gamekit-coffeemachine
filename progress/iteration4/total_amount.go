@@ -23,8 +23,8 @@ SOFTWARE.
 package iteration4
 
 import (
-	"github.com/murex/coffee-machine/progress-runner/process"
-	"github.com/murex/coffee-machine/progress-runner/ref"
+	"github.com/murex/gamekit-coffeemachine/process"
+	"github.com/murex/gamekit-coffeemachine/ref"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"regexp"

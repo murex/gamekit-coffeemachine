@@ -24,7 +24,7 @@ package iteration1
 
 import (
 	"fmt"
-	"github.com/murex/coffee-machine/progress-runner/process"
+	"github.com/murex/gamekit-coffeemachine/process"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"regexp"

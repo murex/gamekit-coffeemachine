@@ -2,7 +2,7 @@ package main
 
 import (
 	"bufio"
-	"github.com/murex/coffee-machine/progress-runner/settings"
+	"github.com/murex/gamekit-coffeemachine/settings"
 	"io"
 	"log"
 	"os"

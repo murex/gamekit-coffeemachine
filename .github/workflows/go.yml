@@ -44,11 +44,11 @@ jobs:
         run: |
           go install gotest.tools/gotestsum@latest
 
-      - name: Test module
+      - name: Test application
         run: |
           make tidy
           make test
 
       - name: Build application
         run: |
-          go build -v ./...
+          make build

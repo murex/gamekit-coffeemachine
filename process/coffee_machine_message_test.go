@@ -24,7 +24,7 @@ package process
 
 import (
 	"fmt"
-	"github.com/murex/coffee-machine/progress-runner/ref"
+	"github.com/murex/gamekit-coffeemachine/ref"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

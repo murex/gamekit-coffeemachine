@@ -7,7 +7,7 @@ endif
 # Run with java by default when environment variable is not set
 LANG_IMPL_PATH ?= java
 
-CONFIG_PKG="github.com/murex/coffee-machine/progress-runner/settings"
+CONFIG_PKG="github.com/murex/gamekit-coffeemachine/settings"
 export CGO_ENABLED=0
 
 .PHONY: default
@@ -100,7 +100,10 @@ test:
 
 .PHONY: clean
 clean:
-	@rm -f bin/*
+	@rm -rf bin
+	@rm -rf dist
+	@rm -rf _test_results
+
 
 .PHONY: download
 download:

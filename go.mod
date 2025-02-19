@@ -1,4 +1,4 @@
-module github.com/murex/coffee-machine/progress-runner
+module github.com/murex/gamekit-coffeemachine
 
 go 1.24.0
 
@@ -211,7 +211,7 @@ require (
 	github.com/klauspost/cpuid/v2 v2.2.9 // indirect
 	github.com/klauspost/pgzip v1.2.6 // indirect
 	github.com/kylelemons/godebug v1.1.0 // indirect
-	github.com/letsencrypt/boulder v0.0.0-20250214182100-eab90ee2f5b6 // indirect
+	github.com/letsencrypt/boulder v0.0.0-20250219223722-d9433fe293be // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/magiconair/properties v1.8.9 // indirect
 	github.com/mailru/easyjson v0.9.0 // indirect

@@ -23,7 +23,7 @@ SOFTWARE.
 package iteration
 
 import (
-	"github.com/murex/coffee-machine/progress-runner/process"
+	"github.com/murex/gamekit-coffeemachine/process"
 	"log"
 	"os"
 	"testing"

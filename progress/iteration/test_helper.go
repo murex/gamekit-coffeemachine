@@ -23,7 +23,7 @@ SOFTWARE.
 package iteration
 
 import (
-	"github.com/murex/coffee-machine/progress-runner/ref"
+	"github.com/murex/gamekit-coffeemachine/ref"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"regexp"

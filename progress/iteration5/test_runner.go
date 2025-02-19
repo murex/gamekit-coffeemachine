@@ -24,9 +24,9 @@ package iteration5
 
 import (
 	"fmt"
-	"github.com/murex/coffee-machine/progress-runner/process"
-	"github.com/murex/coffee-machine/progress-runner/progress/iteration"
-	"github.com/murex/coffee-machine/progress-runner/ref"
+	"github.com/murex/gamekit-coffeemachine/process"
+	"github.com/murex/gamekit-coffeemachine/progress/iteration"
+	"github.com/murex/gamekit-coffeemachine/ref"
 	"github.com/stretchr/testify/require"
 	"testing"
 )

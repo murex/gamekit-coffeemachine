@@ -1,6 +1,6 @@
-# This is goreleaser configuration for releasing go-progress-runner.
+# This is goreleaser configuration for releasing gamekit-coffeemachine.
 # Make sure to check the documentation at http://goreleaser.com
-project_name: progress-runner
+project_name: gamekit-coffeemachine
 before:
   hooks:
     - make tidy
@@ -12,7 +12,7 @@ builds:
     no_main_check: false
     env:
       - CGO_ENABLED=0
-      - CONFIG_PKG=github.com/murex/coffee-machine/progress-runner/settings
+      - CONFIG_PKG=github.com/murex/gamekit-coffeemachine/settings
     ldflags:
       - -s -w
       - -X {{.Env.CONFIG_PKG}}.BuildVersion={{.Version}}
@@ -67,7 +67,7 @@ builds:
     no_main_check: true
     env:
       - CGO_ENABLED=0
-      - CONFIG_PKG=github.com/murex/coffee-machine/progress-runner/settings
+      - CONFIG_PKG=github.com/murex/gamekit-coffeemachine/settings
     ldflags:
       - -s -w
       - -X {{.Env.CONFIG_PKG}}.BuildVersion={{.Version}}
