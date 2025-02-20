@@ -43,6 +43,11 @@ var (
 	stdoutLog = log.New(os.Stderr, "< ", 0)
 )
 
+func init() {
+	// debug log is muted by default
+	debugLog.SetOutput(io.Discard)
+}
+
 var errTimeout = fmt.Errorf("timeout while reading response from coffee machine")
 
 // LangImplPathKey is the environment variable key used to specify the path to the language implementation to run
@@ -70,7 +75,7 @@ type P struct {
 
 // NewCoffeeMachineProcess creates (but does not start) a new process P
 func NewCoffeeMachineProcess() (*P, error) {
-	infoLog.Println("creating Coffee Machine Process")
+	infoLog.Println("creating coffee machine process")
 
 	langImplPath := os.Getenv(LangImplPathKey)
 
