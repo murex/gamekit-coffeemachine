@@ -94,6 +94,10 @@ func startImplementationProcess() *process.P {
 }
 
 func retrieveImplementationIteration(proc *process.P) int {
+	if proc == nil {
+		warningLog.Println("no process to retrieve iteration from")
+		return NoIteration
+	}
 	result, errMessage := proc.SendMessage(process.NewIterationMessage())
 	// If there is any error, return NoIteration, e.g. all test iterations will be skipped
 	if errMessage != nil {
@@ -109,8 +113,10 @@ func retrieveImplementationIteration(proc *process.P) int {
 }
 
 func stopImplementationProcess(proc *process.P) {
-	infoLog.Println("stopping implementation process")
-	_, _ = proc.SendMessage(process.NewShutdownMessage())
+	if proc != nil {
+		infoLog.Println("stopping implementation process")
+		_, _ = proc.SendMessage(process.NewShutdownMessage())
+	}
 }
 
 // Test_Progress is the entry point for running all tests for all iterations

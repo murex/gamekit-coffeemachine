@@ -73,7 +73,7 @@ $(test2json_bin):
 
 .PHONY: test
 test:
-	@gotestsum ./...
+	@gotestsum ./... -test.count=1
 
 .PHONY: clean
 clean:
