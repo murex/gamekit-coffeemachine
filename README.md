@@ -1,3 +1,8 @@
+[![Go build and test](https://github.com/murex/gamekit-coffeemachine/actions/workflows/go.yml/badge.svg)](https://github.com/murex/gamekit-coffeemachine/actions/workflows/go.yml)
+[![Go lint](https://github.com/murex/gamekit-coffeemachine/actions/workflows/golangci_lint.yml/badge.svg)](https://github.com/murex/gamekit-coffeemachine/actions/workflows/golangci_lint.yml)
+[![Go release](https://github.com/murex/gamekit-coffeemachine/actions/workflows/go_releaser.yml/badge.svg)](https://github.com/murex/gamekit-coffeemachine/actions/workflows/go_releaser.yml)
+[![Dependabot Updates](https://github.com/murex/gamekit-coffeemachine/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/murex/gamekit-coffeemachine/actions/workflows/dependabot/dependabot-updates)
+
 # Gamification kit for the coffee machine kata
 
 This repository provides items focused on gamifying the coffee machine kata.
