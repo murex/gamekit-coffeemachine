@@ -31,6 +31,7 @@ import (
 	"github.com/murex/gamekit-coffeemachine/progress/iteration3"
 	"github.com/murex/gamekit-coffeemachine/progress/iteration4"
 	"github.com/murex/gamekit-coffeemachine/progress/iteration5"
+	"github.com/murex/gamekit-coffeemachine/settings"
 	"log"
 	"os"
 	"strconv"
@@ -54,11 +55,6 @@ type Context struct {
 
 var ctx Context
 
-// IterationTestRunner provides the interface to be implemented by each iteration test runner
-//type IterationTestRunner interface {
-//	TestMain(p *process.P) func(t *testing.T)
-//}
-
 // TestMain is the main function when running go test
 func TestMain(m *testing.M) {
 	setup()
@@ -68,6 +64,7 @@ func TestMain(m *testing.M) {
 }
 
 func setup() {
+	infoLog.Println("starting progress runner", settings.BuildVersion)
 	proc := startImplementationProcess()
 	ctx = Context{
 		process:   proc,
@@ -121,6 +118,7 @@ func stopImplementationProcess(proc *process.P) {
 
 // Test_Progress is the entry point for running all tests for all iterations
 func Test_Progress(t *testing.T) {
+	t.Log("progress runner version", settings.BuildVersion)
 	t.Log("testing implementation progress on coffee machine")
 	if ctx.iteration == NoIteration {
 		t.Skipf("skipping progress tests (implementation not ready)")

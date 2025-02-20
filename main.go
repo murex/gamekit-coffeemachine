@@ -23,13 +23,13 @@ var (
 // main is the entry point of the coffee machine command line runner
 // nolint: revive
 func main() {
+	infoLog.Println("starting coffee machine command line interface", settings.BuildVersion)
 	if len(os.Args) < 2 {
 		errorLog.Fatalf("syntax: %s <language-implementation-path>", path.Base(os.Args[0]))
 	}
 	langImplPath := os.Args[1]
 	language := filepath.Base(langImplPath)
 
-	infoLog.Println("starting coffee machine process runner", settings.BuildVersion)
 	infoLog.Println("implementation path is", langImplPath)
 	infoLog.Println("language implementation is", language)
 
