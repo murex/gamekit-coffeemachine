@@ -39,17 +39,17 @@ mkdir -p _test_results
 
 gotestsum_exe="${base_dir}/bin/gotestsum${extension}"
 test2json_exe="${base_dir}/bin/test2json${extension}"
-progress_tests_exe="${base_dir}/bin/progress-tests${extension}"
+progress_runner_exe="${base_dir}/bin/progress-runner${extension}"
 
-package_name=progress-tests-"${language}"
-junitfile=_test_results/progress_tests-"${language}".xml
+package_name=progress-runner-"${language}"
+junitfile=_test_results/progress_runner-"${language}".xml
 if [ "${trace_mode}" == "-vv" ]; then
   # Prints test names and failed tests output
   ${gotestsum_exe} \
     --format testdox \
     --junitfile "${junitfile}" \
     --raw-command \
-    -- "${test2json_exe}" -t -p "${package_name}" "${progress_tests_exe}" -test.v=test2json
+    -- "${test2json_exe}" -t -p "${package_name}" "${progress_runner_exe}" -test.v=test2json
 elif [ "${trace_mode}" == "-v" ]; then
   # Prints test names but not failed tests output
   ${gotestsum_exe} \
@@ -57,7 +57,7 @@ elif [ "${trace_mode}" == "-v" ]; then
     --hide-summary=all \
     --junitfile "${junitfile}" \
     --raw-command \
-    -- "${test2json_exe}" -t -p "${package_name}" "${progress_tests_exe}" -test.v=test2json
+    -- "${test2json_exe}" -t -p "${package_name}" "${progress_runner_exe}" -test.v=test2json
 else
   # Prints dots only
   ${gotestsum_exe} \
@@ -65,5 +65,5 @@ else
     --hide-summary=all \
     --junitfile "${junitfile}" \
     --raw-command \
-    -- "${test2json_exe}" -t -p "${package_name}" "${progress_tests_exe}" -test.v=test2json
+    -- "${test2json_exe}" -t -p "${package_name}" "${progress_runner_exe}" -test.v=test2json
 fi

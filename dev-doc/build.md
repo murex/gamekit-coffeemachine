@@ -84,14 +84,14 @@ make
 
 This command generates all the gamification kit executables in the [bin](../bin) directory.
 
-| Executable                 | Description                                                                        |
-|----------------------------|------------------------------------------------------------------------------------|
-| `bin/progress-tests[.exe]` | Progress Runner executable. This is the test executable running all progress tests |
-| `bin/gotestsum[.exe]`      | gotestsum executable used for running and rendering go test results (*)            |
-| `bin/test2json[.exe]`      | go tool used for converting raw go test results into json (*)                      |
-| `bin/cli[.exe]`            | Command Line Interface utility                                                     |
+| Executable                  | Description                                                                        |
+|-----------------------------|------------------------------------------------------------------------------------|
+| `bin/progress-runner[.exe]` | Progress Runner executable. This is the test executable running all progress tests |
+| `bin/gotestsum[.exe]`       | gotestsum executable used for running and rendering go test results (*)            |
+| `bin/test2json[.exe]`       | go tool used for converting raw go test results into json (*)                      |
+| `bin/cli[.exe]`             | Command Line Interface utility                                                     |
 
-(*) These executables are built here so that they can be re-distributed along with progress-tests executable
+(*) These executables are built here so that they can be re-distributed along with progress-runner executable
 without the need to have Go SDK installed on the end user machine.
 
 ## Run gamification kit executables
@@ -106,40 +106,29 @@ coffee machine implementation.
 
 #### Default mode (one dot per test case)
 
-Either:
-
 ```shell
-env LANG_IMPL_PATH=../kata-coffeemachine/java make run-progress
-```
-
-Or:
-
-```shell
-./run-progress-runner.sh ../kata-coffeemachine/java
+./progress-runner.sh ../kata-coffeemachine/java
 ```
 
 #### Verbose mode (one line per test case with test description)
 
 ```shell
-./run-progress-runner.sh ../kata-coffeemachine/java -v
+./progress-runner.sh ../kata-coffeemachine/java -v
 ```
 
 #### Very verbose mode (one line per test case with test description + failed tests output details)
 
 ```shell
-./run-progress-runner.sh ../kata-coffeemachine/java -vv
+./progress-runner.sh ../kata-coffeemachine/java -vv
 ```
 
 ### Run the command line interface utility
 
-Either:
-
-```shell
-env LANG_IMPL_PATH=../kata-coffeemachine/java make run-cli
-```
-
-Or:
-
 ```shell
 ./bin/cli ../kata-coffeemachine/java
+```
+## Clean up generated files and directories
+
+```shell
+make clean
 ```

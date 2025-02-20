@@ -4,9 +4,6 @@ else
 	EXT := ""
 endif
 
-# Run with java by default when environment variable is not set
-LANG_IMPL_PATH ?= java
-
 CONFIG_PKG="github.com/murex/gamekit-coffeemachine/settings"
 export CGO_ENABLED=0
 
@@ -48,13 +45,9 @@ $(cli_bin):
         -X ${CONFIG_PKG}.BuildAuthor="`id -un`" \
         "
 
-.PHONY: run-cli
-run-cli: $(cli_bin)
-	@$< $(LANG_IMPL_PATH)
-
-progress_tests_bin := bin/progress-tests$(EXT)
-build: $(progress_tests_bin)
-$(progress_tests_bin):
+progress_runner_bin := bin/progress-runner$(EXT)
+build: $(progress_runner_bin)
+$(progress_runner_bin):
 	@mkdir -p bin
 	@go test -c -o $@ ./progress -ldflags "-s -w \
  	  -X ${CONFIG_PKG}.BuildVersion="`git describe --tags`" \
@@ -78,25 +71,9 @@ $(test2json_bin):
 	@mkdir -p bin
 	@go build -o $@ -ldflags="-s -w" cmd/test2json
 
-define RUN_PROGRESS_TESTS
-mkdir -p _test_results
-export LANG_IMPL_PATH=$(1)
-export LANGUAGE=$(basename $(1))
-$(gotestsum_bin) \
-  --format testdox \
-  --junitfile _test_results/progress-tests-$(LANGUAGE).xml \
-  --hide-summary=all \
-  --raw-command \
-  -- $(test2json_bin) -t -p progress-tests-$(LANGUAGE) bin/progress-tests$(EXT) -test.v=test2json
-endef
-
-.PHONY: run-progress
-run-progress: $(progress_tests_bin) $(test2json_bin) $(gotestsum_bin)
-	@$(call RUN_PROGRESS_TESTS,$(LANG_IMPL_PATH))
-
 .PHONY: test
 test:
-	@env LANG_IMPL_PATH=java gotestsum ./...
+	@gotestsum ./...
 
 .PHONY: clean
 clean:

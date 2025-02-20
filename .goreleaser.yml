@@ -60,9 +60,9 @@ builds:
     goarch:
       - amd64
       - arm64
-  - id: "progress-tests"
+  - id: "progress-runner"
     dir: ./progress
-    binary: progress-tests
+    binary: progress-runner
     command: test
     no_main_check: true
     env:
