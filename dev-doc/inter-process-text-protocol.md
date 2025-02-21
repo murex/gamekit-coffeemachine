@@ -6,6 +6,9 @@ Communication between the Progress Runner (or the CLI utility) and the implement
 done through a simple inter-process text protocol built on top Unix pipes.
 
 ```mermaid
+---
+title: Inter-Process Text Protocol - Main Modules
+---
 graph LR
     subgraph client_process [Client Application Process]
         client_app[Client<br>Application]
@@ -22,13 +25,26 @@ graph LR
     client_app <--> client_msg_handler
     client_msg_handler <== pipe ===> impl_runner
     impl_runner <--> impl_facade <--> impl_app
-    classDef client fill:#369;
-    classDef impl fill:#693;
+    classDef client fill:#9e1a2c;
+    classDef impl fill:#1a5a9e;
     class client_app client;
     class client_msg_handler client;
     class impl_runner impl;
     class impl_facade impl;
     class impl_app impl;
+```
+
+```mermaid
+---
+title: Color Legend
+---
+graph
+    CLIENT_PROCESS(Module in the client application process)
+    IMPL_PROCESS(Module in the language implementation process)
+    classDef client fill:#9e1a2c;
+    classDef impl fill:#1a5a9e;
+    class CLIENT_PROCESS client;
+    class IMPL_PROCESS impl;
 ```
 
 When the `client application process` (the Progress Runner or the CLI utility) is started:

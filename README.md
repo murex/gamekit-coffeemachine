@@ -8,7 +8,7 @@
 This repository provides items focused on gamifying the coffee machine kata.
 
 These items are by design "programming language agnostic",
-e.g. they may be used with the coffee machine kata in any language.
+e.g. they may be used with the coffee machine kata in any language (assuming the language is supported).
 
 ## Available Gamification Tools
 
@@ -33,10 +33,13 @@ It's not intended to be used directly by kata participants.
 ## Overall Architecture
 
 Both the Progress Runner and the Command Line Interface utility are built
-on top of a common text protocol.
-Refer to [Inter-Process Text Protocol](./dev-doc/inter-process-text-protocol.md) for further details.
+on top of a common inter-process text protocol.
+You can refer to [Inter-Process Text Protocol](./dev-doc/inter-process-text-protocol.md) for further details.
 
 ```mermaid
+---
+title: GameKit for Coffee Machine Kata - Overall Architecture
+---
 graph LR
     subgraph runner [Progress Runner]
         PROGRESS_RUNNER(Progress<br>Runner)
@@ -73,52 +76,57 @@ graph LR
     PROTOCOL --> JAVA_RUNNER --> JAVA_FACADE --> JAVA_IMPL
     PROTOCOL --> CPP_RUNNER --> CPP_FACADE --> CPP_IMPL
     PROTOCOL --> PYTHON_RUNNER --> PYTHON_FACADE --> PYTHON_IMPL
-    classDef testModule fill:#369;
+    classDef providedModule fill:#369;
     classDef implModule fill:#693;
-    class PROGRESS_RUNNER testModule;
-    class CLI_DRIVER_1 testModule;
-    class CLI_RUNNER testModule;
-    class CLI_DRIVER_2 testModule;
-    class JAVA_RUNNER testModule;
-    class JAVA_FACADE testModule;
+    class PROGRESS_RUNNER providedModule;
+    class CLI_DRIVER_1 providedModule;
+    class CLI_RUNNER providedModule;
+    class CLI_DRIVER_2 providedModule;
+    class JAVA_RUNNER providedModule;
+    class JAVA_FACADE providedModule;
     class JAVA_IMPL implModule;
-    class CPP_RUNNER testModule;
-    class CPP_FACADE testModule;
+    class CPP_RUNNER providedModule;
+    class CPP_FACADE providedModule;
     class CPP_IMPL implModule;
-    class PYTHON_RUNNER testModule;
-    class PYTHON_FACADE testModule;
+    class PYTHON_RUNNER providedModule;
+    class PYTHON_FACADE providedModule;
     class PYTHON_IMPL implModule;
+```
+
+```mermaid
+---
+title: Color Legend
+---
+graph
+    PROVIDED_MODULE(Provided with the kata)
+    IMPL_MODULE(Implemented by the kata participant)
+    classDef providedModule fill:#369;
+    classDef implModule fill:#693;
+    class PROVIDED_MODULE providedModule;
+    class IMPL_MODULE implModule;
 ```
 
 ## Repository Breakdown
 
-This repository (`test-coffeemachine`) provides the client tool runners:
+This repository (`gamekit-coffeemachine`) provides the client tool runners:
 
 - Progress Runner
 - Command Line Interface Runner
 
-The kata repository (`kata-coffeemachine`) contains the implementation of the coffee machine kata in different
-languages.
+The kata repository (`kata-coffeemachine`) contains the implementation of the coffee machine kata
+with support for implementation in different languages.
+
 For each supported language:
 
 - The command line runner is fully implemented.
 - The facade skeleton is provided.
 
-The parts remaining to be implemented by kata participants are
+The parts remaining to be implemented by kata participants are:
 
 - the actual implementation of kata.
 - the facade implementation, wiring the implementation to the command line runner.
 
-## TODO
-
-- [ ] Add a diagram with the 2 repositories
-- [x] Add instructions on how to run the tools
-- [x] Move protocol details to a separate page
-- [ ] Add instructions on how to implement the facade in a new language
-- [x] Add development instructions
-- [x] Migrate this repository to murex (public)
-
-## Building, testing and releasing coaching helpers for the coffee machine kata
+## Building, testing and releasing gamification tools for the coffee machine kata
 
 Refer to [development documentation](./dev-doc/README.md) for details.
 
