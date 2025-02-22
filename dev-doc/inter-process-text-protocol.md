@@ -11,14 +11,14 @@ title: Inter-Process Text Protocol - Main Modules
 ---
 graph LR
     subgraph client_process [Client Application Process]
-        client_app[Client<br>Application]
-        client_msg_handler[Message<br>Handler]
+        client_app(Client<br>Application)
+        client_msg_handler(Message<br>Handler)
     end
 
     subgraph impl_process [Language Implementation Process]
-        impl_runner[Command<br>Line<br>Runner]
-        impl_facade[Facade]
-        impl_app[Implementation]
+        impl_runner(Command<br>Line<br>Runner)
+        impl_facade(Facade)
+        impl_app(Implementation)
     end
 
     client_process -. fork -.-> impl_process
