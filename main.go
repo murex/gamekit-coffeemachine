@@ -21,13 +21,18 @@ var (
 )
 
 // main is the entry point of the coffee machine command line runner
-// nolint: revive
 func main() {
 	infoLog.Println("starting coffee machine command line interface", settings.BuildVersion)
-	langImplPath := parseArgs()
+	runCli(parseArgs())
+	infoLog.Println("closing coffee machine process runner")
+}
 
+// runCli starts the coffee machine command line interface.
+// runDir is the directory where the coffee machine implementation is located.
+// It must contain a run.sh script that starts the coffee machine implementation.
+func runCli(runDir string) {
 	cmd := exec.Command("bash", "./run.sh")
-	cmd.Dir = langImplPath
+	cmd.Dir = runDir
 
 	stdin, errStdinPipe := cmd.StdinPipe()
 	if errStdinPipe != nil {
@@ -56,8 +61,6 @@ func main() {
 	if errWait := cmd.Wait(); errWait != nil {
 		errorLog.Fatalln(errWait)
 	}
-
-	infoLog.Println("closing coffee machine process runner")
 }
 
 func parseArgs() string {
@@ -75,17 +78,17 @@ func parseArgs() string {
 	return langImplPath
 }
 
-func parseAndForward(stdin io.WriteCloser) {
+func parseAndForward(w io.WriteCloser) {
 	defer func(stdin io.WriteCloser) {
 		_ = stdin.Close()
-	}(stdin)
+	}(w)
 	const invite = "enter command to send to the coffee machine"
 	infoLog.Println(invite)
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
 		msg := strings.TrimSpace(strings.ToLower(scanner.Text()))
 		stdinLog.Println(msg)
-		_, err := io.WriteString(stdin, msg+"\n")
+		_, err := io.WriteString(w, msg+"\n")
 		if err != nil {
 			errorLog.Fatalln(err)
 		}
@@ -98,8 +101,8 @@ func parseAndForward(stdin io.WriteCloser) {
 	}
 }
 
-func scanAndLog(stdout io.ReadCloser, logger *log.Logger) {
-	scanner := bufio.NewScanner(stdout)
+func scanAndLog(r io.ReadCloser, logger *log.Logger) {
+	scanner := bufio.NewScanner(r)
 	for scanner.Scan() {
 		logger.Println(scanner.Text())
 	}
