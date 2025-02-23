@@ -2,11 +2,12 @@ module github.com/murex/gamekit-coffeemachine
 
 go 1.24.0
 
-require (
-	github.com/goreleaser/goreleaser v1.26.2
-	github.com/stretchr/testify v1.10.0
-	gotest.tools/gotestsum v1.12.0
+tool (
+	github.com/goreleaser/goreleaser
+	gotest.tools/gotestsum
 )
+
+require github.com/stretchr/testify v1.10.0
 
 require (
 	al.essio.dev/pkg/shellescape v1.5.1 // indirect
@@ -84,7 +85,7 @@ require (
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
 	github.com/bitfield/gotestdox v0.2.2 // indirect
 	github.com/blacktop/go-dwarf v1.0.10 // indirect
-	github.com/blacktop/go-macho v1.1.239 // indirect
+	github.com/blacktop/go-macho v1.1.240 // indirect
 	github.com/blakesmith/ar v0.0.0-20190502131153-809d4375e1fb // indirect
 	github.com/blang/semver v3.5.1+incompatible // indirect
 	github.com/bluesky-social/indigo v0.0.0-20250222003125-2503553ea604 // indirect
@@ -177,6 +178,7 @@ require (
 	github.com/googleapis/gax-go/v2 v2.14.1 // indirect
 	github.com/goreleaser/chglog v0.6.2 // indirect
 	github.com/goreleaser/fileglob v1.3.0 // indirect
+	github.com/goreleaser/goreleaser v1.26.2 // indirect
 	github.com/goreleaser/nfpm/v2 v2.41.2 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
@@ -327,6 +329,7 @@ require (
 	gopkg.in/mail.v2 v2.3.1 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
+	gotest.tools/gotestsum v1.12.0 // indirect
 	lukechampine.com/blake3 v1.3.0 // indirect
 	sigs.k8s.io/kind v0.27.0 // indirect
 	sigs.k8s.io/yaml v1.4.0 // indirect

@@ -193,8 +193,8 @@ github.com/bitfield/gotestdox v0.2.2 h1:x6RcPAbBbErKLnapz1QeAlf3ospg8efBsedU93CD
 github.com/bitfield/gotestdox v0.2.2/go.mod h1:D+gwtS0urjBrzguAkTM2wodsTQYFHdpx8eqRJ3N+9pY=
 github.com/blacktop/go-dwarf v1.0.10 h1:i9zYgcIROETsNZ6V+zZn3uDH21FCG5BLLZ837GitxS0=
 github.com/blacktop/go-dwarf v1.0.10/go.mod h1:4W2FKgSFYcZLDwnR7k+apv5i3nrau4NGl9N6VQ9DSTo=
-github.com/blacktop/go-macho v1.1.239 h1:tQIDH7U30X5sEmg+XDgJW22oMNGszuBk6Ha4uAD9was=
-github.com/blacktop/go-macho v1.1.239/go.mod h1:dtlW2AJKQpFzImBVPWiUKZ6OxrQ2MLfWi/BPPe0EONE=
+github.com/blacktop/go-macho v1.1.240 h1:tHmY3dsGdjEyW2o6buyaWNakukCKk35UwL2zu6FzUb4=
+github.com/blacktop/go-macho v1.1.240/go.mod h1:dtlW2AJKQpFzImBVPWiUKZ6OxrQ2MLfWi/BPPe0EONE=
 github.com/blakesmith/ar v0.0.0-20190502131153-809d4375e1fb h1:m935MPodAbYS46DG4pJSv7WO+VECIWUQ7OJYSoTrMh4=
 github.com/blakesmith/ar v0.0.0-20190502131153-809d4375e1fb/go.mod h1:PkYb9DJNAwrSvRx5DYA+gUcOIgTGVMNkfSCbZM8cWpI=
 github.com/blang/semver v3.5.1+incompatible h1:cQNTCjp13qL8KC3Nbxr/y2Bqb63oX6wdnnjpJbkM4JQ=

@@ -12,11 +12,11 @@ default: build ;
 
 # Convenience target for automating release preparation
 .PHONY: prepare
-prepare: deps install-tools tidy lint build test
+prepare: deps tidy lint build test
 
 .PHONY: deps
 deps:
-	@go get -u -t ./...
+	@go get -u -t tool ./...
 
 .PHONY: lint
 lint:
@@ -62,7 +62,7 @@ gotestsum_bin := bin/gotestsum$(EXT)
 build: $(gotestsum_bin)
 $(gotestsum_bin):
 	@mkdir -p bin
-	@go get gotest.tools/gotestsum
+	@go get -tool gotest.tools/gotestsum
 	@go build -o $@ -ldflags="-s -w" gotest.tools/gotestsum
 
 test2json_bin := bin/test2json$(EXT)
@@ -73,7 +73,7 @@ $(test2json_bin):
 
 .PHONY: test
 test:
-	@gotestsum ./... -test.count=1
+	@go tool gotestsum ./... -test.count=1
 
 .PHONY: clean
 clean:
@@ -86,13 +86,9 @@ clean:
 download:
 	@go mod download
 
-.PHONY: install-tools
-install-tools: download
-	@cat tools.go | grep _ | awk -F'"' '{print $$2}' | xargs -tI % go install %@latest
-
 .PHONY: release
 release:
-	@goreleaser $(GORELEASER_ARGS)
+	@go tool goreleaser $(GORELEASER_ARGS)
 
 .PHONY: snapshot
 snapshot: GORELEASER_ARGS= --clean --snapshot
