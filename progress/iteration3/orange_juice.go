@@ -24,6 +24,7 @@ package iteration3
 
 import (
 	"github.com/murex/gamekit-coffeemachine/process"
+	"github.com/murex/gamekit-coffeemachine/progress/iteration"
 	"github.com/murex/gamekit-coffeemachine/ref"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -49,14 +50,8 @@ func noOrangeJuiceIfNotEnoughMoneyTest() (string, func(t *testing.T, p *process.
 	return "I cannot buy " + drink.Name + " with less than 0.60 euro",
 		func(t *testing.T, p *process.P) {
 			payment := 0.10
-
 			cmd, err := runBuildDrinkMakerCommand(p, drink, 0, payment, false)
-			require.NoError(t, err)
-			missing := ref.AmountRegexp(drink.Price - payment)
-			pattern := regexp.MustCompile("^M:.*" + missing + ".*$")
-			assert.Regexp(t, pattern, cmd,
-				"drink maker command should start with 'M:' and contain missing amount '%s'",
-				missing)
+			iteration.AssertMissingMoneyMessageFormat(t, drink, payment, cmd, err)
 		}
 }
 

@@ -49,3 +49,17 @@ func AssertDrinkIsNotServed(t *testing.T, drink ref.Drink, response string, err 
 		"drink maker command for %s should not start with '%s:' when not enough money",
 		drink.Name, drink.CommandCode)
 }
+
+// AssertMissingMoneyMessageFormat is a helper function asserting that a message indicating that
+// not enough money was provided contains the expected information (starting with 'M:' and
+// containing the missing amount)
+// nolint:revive
+func AssertMissingMoneyMessageFormat(t *testing.T, drink ref.Drink, payment float64, response string, err error) {
+	t.Helper()
+	require.NoError(t, err)
+	missing := ref.AmountRegexp(drink.Price - payment)
+	pattern := regexp.MustCompile("^M:.*" + missing + ".*$")
+	assert.Regexpf(t, pattern, response,
+		"drink maker command should start with 'M:' and contain missing amount '%s'",
+		missing)
+}
