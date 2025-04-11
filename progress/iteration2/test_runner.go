@@ -40,6 +40,9 @@ func New() iteration.TestRunner {
 		noTeaIfNotEnoughMoneyTest,
 		noChocolateIfNotEnoughMoneyTest,
 		moreMoneyThanNeededTest,
+		messageWhenNotEnoughMoneyForCoffeeTest,
+		messageWhenNotEnoughMoneyForTeaTest,
+		messageWhenNotEnoughMoneyForChocolateTest,
 	)
 }
 
@@ -62,4 +65,11 @@ func assertDrinkIsNotServed(t *testing.T, p *process.P, drink ref.Drink, money f
 	t.Helper()
 	cmd, err := runBuildDrinkMakerCommand(p, drink, money)
 	iteration.AssertDrinkIsNotServed(t, drink, cmd, err)
+}
+
+func assertMissingMoneyMessage(t *testing.T, p *process.P, drink ref.Drink) {
+	t.Helper()
+	money := 0.10
+	cmd, err := runBuildDrinkMakerCommand(p, drink, money)
+	iteration.AssertMissingMoneyMessageFormat(t, drink, money, cmd, err)
 }
