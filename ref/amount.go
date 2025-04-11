@@ -38,6 +38,12 @@ func eurosAndCents(amount float64) (euros int, cents int) {
 // given amount will match both '.' and ',' as decimal separator
 func AmountRegexp(amount float64) string {
 	euros, cents := eurosAndCents(amount)
-	missing := fmt.Sprintf("%d[\\.,]%02d", euros, cents)
-	return missing
+	switch {
+	case cents == 0:
+		return fmt.Sprintf("%d", euros)
+	case cents%10 == 0:
+		return fmt.Sprintf("%d[\\.,]%d", euros, cents/10)
+	default:
+		return fmt.Sprintf("%d[\\.,]%02d", euros, cents)
+	}
 }
