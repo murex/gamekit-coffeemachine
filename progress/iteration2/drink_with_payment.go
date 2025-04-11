@@ -91,3 +91,27 @@ func moreMoneyThanNeededTest() (string, func(t *testing.T, p *process.P)) {
 			assertDrinkIsServed(t, p, drink, drink.Price+1.00)
 		}
 }
+
+func messageWhenNotEnoughMoneyForTeaTest() (string, func(t *testing.T, p *process.P)) {
+	drink := ref.Tea
+	return "if not enough money is provided for " + drink.Name + " we want to send a message to the drink maker",
+		func(t *testing.T, p *process.P) {
+			assertMissingMoneyMessage(t, p, drink)
+		}
+}
+
+func messageWhenNotEnoughMoneyForCoffeeTest() (string, func(t *testing.T, p *process.P)) {
+	drink := ref.Coffee
+	return "if not enough money is provided for " + drink.Name + " we want to send a message to the drink maker",
+		func(t *testing.T, p *process.P) {
+			assertMissingMoneyMessage(t, p, drink)
+		}
+}
+
+func messageWhenNotEnoughMoneyForChocolateTest() (string, func(t *testing.T, p *process.P)) {
+	drink := ref.Chocolate
+	return "if not enough money is provided for " + drink.Name + " we want to send a message to the drink maker",
+		func(t *testing.T, p *process.P) {
+			assertMissingMoneyMessage(t, p, drink)
+		}
+}
