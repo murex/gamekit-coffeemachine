@@ -50,7 +50,7 @@ func makeDrinkWithAmount(p *process.P, drink ref.Drink, amount float64) {
 }
 
 func makeDrinks(p *process.P, drink ref.Drink, count int) {
-	for i := 0; i < count; i++ {
+	for range count {
 		makeDrink(p, drink)
 	}
 }

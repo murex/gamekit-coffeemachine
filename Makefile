@@ -12,7 +12,7 @@ default: build ;
 
 # Convenience target for automating release preparation
 .PHONY: prepare
-prepare: deps tidy lint build test
+prepare: deps tidy lint modernize build test
 
 .PHONY: deps
 deps:
@@ -21,6 +21,10 @@ deps:
 .PHONY: lint
 lint:
 	@golangci-lint run -v
+
+.PHONY: modernize
+modernize:
+	@go run golang.org/x/tools/gopls/internal/analysis/modernize/cmd/modernize@latest -test ./...
 
 .PHONY: vet
 vet:
