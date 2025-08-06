@@ -24,9 +24,10 @@ package process
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/murex/gamekit-coffeemachine/ref"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func Test_iteration_message_format(t *testing.T) {

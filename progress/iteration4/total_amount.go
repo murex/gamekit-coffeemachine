@@ -23,12 +23,13 @@ SOFTWARE.
 package iteration4
 
 import (
+	"regexp"
+	"testing"
+
 	"github.com/murex/gamekit-coffeemachine/process"
 	"github.com/murex/gamekit-coffeemachine/ref"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"regexp"
-	"testing"
 )
 
 func totalAmountInReportTest() (string, func(t *testing.T, p *process.P)) {

@@ -23,9 +23,10 @@ SOFTWARE.
 package iteration5
 
 import (
+	"testing"
+
 	"github.com/murex/gamekit-coffeemachine/process"
 	"github.com/murex/gamekit-coffeemachine/ref"
-	"testing"
 )
 
 func canServeCoffeeWhenWaterTankIsFull() (string, func(t *testing.T, p *process.P)) {

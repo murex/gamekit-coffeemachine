@@ -24,6 +24,7 @@ package process
 
 import (
 	"fmt"
+
 	"github.com/murex/gamekit-coffeemachine/ref"
 )
 

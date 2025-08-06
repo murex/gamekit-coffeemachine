@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/murex/gamekit-coffeemachine/cli"
 	"os"
+
+	"github.com/murex/gamekit-coffeemachine/cli"
 )
 
 // main is the entry point of the coffee machine command line runner

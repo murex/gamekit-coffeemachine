@@ -24,8 +24,9 @@ package ref
 
 import (
 	"fmt"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_euros_and_cents_parsing(t *testing.T) {

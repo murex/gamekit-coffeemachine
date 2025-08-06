@@ -23,10 +23,11 @@ SOFTWARE.
 package iteration2
 
 import (
+	"testing"
+
 	"github.com/murex/gamekit-coffeemachine/process"
 	"github.com/murex/gamekit-coffeemachine/progress/iteration"
 	"github.com/murex/gamekit-coffeemachine/ref"
-	"testing"
 )
 
 // New returns the test runner for this iteration

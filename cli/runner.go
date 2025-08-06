@@ -2,7 +2,6 @@ package cli
 
 import (
 	"bufio"
-	"github.com/murex/gamekit-coffeemachine/settings"
 	"io"
 	"log"
 	"os"
@@ -11,6 +10,8 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
+
+	"github.com/murex/gamekit-coffeemachine/settings"
 )
 
 var (

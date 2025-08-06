@@ -24,12 +24,13 @@ package iteration4
 
 import (
 	"fmt"
+	"regexp"
+	"testing"
+
 	"github.com/murex/gamekit-coffeemachine/process"
 	"github.com/murex/gamekit-coffeemachine/ref"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"regexp"
-	"testing"
 )
 
 func manyCoffeesInReportTest() (string, func(t *testing.T, p *process.P)) {

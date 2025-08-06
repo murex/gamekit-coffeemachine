@@ -24,11 +24,12 @@ package iteration1
 
 import (
 	"fmt"
+	"regexp"
+	"testing"
+
 	"github.com/murex/gamekit-coffeemachine/process"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"regexp"
-	"testing"
 )
 
 func drinkWithNoSugarTest() (string, func(t *testing.T, p *process.P)) {

@@ -24,6 +24,11 @@ package progress
 
 import (
 	"fmt"
+	"log"
+	"os"
+	"strconv"
+	"testing"
+
 	"github.com/murex/gamekit-coffeemachine/process"
 	"github.com/murex/gamekit-coffeemachine/progress/iteration"
 	"github.com/murex/gamekit-coffeemachine/progress/iteration1"
@@ -32,10 +37,6 @@ import (
 	"github.com/murex/gamekit-coffeemachine/progress/iteration4"
 	"github.com/murex/gamekit-coffeemachine/progress/iteration5"
 	"github.com/murex/gamekit-coffeemachine/settings"
-	"log"
-	"os"
-	"strconv"
-	"testing"
 )
 
 var (

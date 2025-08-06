@@ -23,10 +23,11 @@ SOFTWARE.
 package iteration
 
 import (
-	"github.com/murex/gamekit-coffeemachine/process"
 	"log"
 	"os"
 	"testing"
+
+	"github.com/murex/gamekit-coffeemachine/process"
 )
 
 // TestCase is a convenience type used for defining a test case

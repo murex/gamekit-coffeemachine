@@ -24,11 +24,12 @@ package iteration5
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/murex/gamekit-coffeemachine/process"
 	"github.com/murex/gamekit-coffeemachine/progress/iteration"
 	"github.com/murex/gamekit-coffeemachine/ref"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 // New returns the test runner for this iteration

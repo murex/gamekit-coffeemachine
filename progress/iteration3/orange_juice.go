@@ -23,13 +23,14 @@ SOFTWARE.
 package iteration3
 
 import (
+	"regexp"
+	"testing"
+
 	"github.com/murex/gamekit-coffeemachine/process"
 	"github.com/murex/gamekit-coffeemachine/progress/iteration"
 	"github.com/murex/gamekit-coffeemachine/ref"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"regexp"
-	"testing"
 )
 
 func orangeJuiceTest() (string, func(t *testing.T, p *process.P)) {

@@ -23,11 +23,12 @@ SOFTWARE.
 package iteration1
 
 import (
+	"regexp"
+	"testing"
+
 	"github.com/murex/gamekit-coffeemachine/process"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"regexp"
-	"testing"
 )
 
 func sugarComesWithAStickTest() (string, func(t *testing.T, p *process.P)) {

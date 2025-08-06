@@ -23,11 +23,12 @@ SOFTWARE.
 package iteration
 
 import (
+	"regexp"
+	"testing"
+
 	"github.com/murex/gamekit-coffeemachine/ref"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"regexp"
-	"testing"
 )
 
 // AssertDrinkIsServed is a helper function asserting that a drink is served
