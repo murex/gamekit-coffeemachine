@@ -1,6 +1,6 @@
 module github.com/murex/gamekit-coffeemachine
 
-go 1.24.5
+go 1.25
 
 tool (
 	github.com/goreleaser/goreleaser
