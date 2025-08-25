@@ -7,7 +7,7 @@ tool (
 	gotest.tools/gotestsum
 )
 
-require github.com/stretchr/testify v1.10.0
+require github.com/stretchr/testify v1.11.0
 
 require (
 	al.essio.dev/pkg/shellescape v1.6.0 // indirect
