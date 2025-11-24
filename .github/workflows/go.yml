@@ -1,4 +1,4 @@
-name: Go build and test
+name: go build and test
 
 permissions:
   contents: read
@@ -7,7 +7,7 @@ permissions:
 on:
   push:
     branches:
-      - '**'
+      - "**"
     paths:
       - "**/*.go"
       - "**/*.mod"
@@ -15,12 +15,11 @@ on:
       - "**/Makefile"
       - "!**/*.md"
   pull_request:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
-    inputs: { }
+    inputs: {}
 
 jobs:
-
   build:
     runs-on: ${{ matrix.os }}
     defaults:
@@ -28,27 +27,27 @@ jobs:
         shell: bash
     strategy:
       matrix:
-        os: [ macos-latest, ubuntu-latest, windows-latest ]
+        os: [macos-latest, ubuntu-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - name: Skip duplicate actions
+      - name: skip duplicate actions
         uses: fkirc/skip-duplicate-actions@v5.3.1
 
-      - name: Set up Go
+      - name: set up Go
         uses: actions/setup-go@v6
         with:
-          go-version: '1.25'
+          go-version: "1.25"
           check-latest: true
           cache-dependency-path: go.mod
 
-      - name: Test application
+      - name: test application
         run: |
           make tidy
           make test
 
-      - name: Build application
+      - name: build application
         run: |
           make build
