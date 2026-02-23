@@ -89,6 +89,7 @@ func scanAndSend(w io.WriteCloser) {
 	for scanner.Scan() {
 		msg := strings.TrimSpace(strings.ToLower(scanner.Text()))
 		stdinLog.Println(msg)
+		//nolint:gosec // G705 false positive: w is a pipe, not an HTTP response writer
 		_, err := io.WriteString(w, msg+"\n")
 		if err != nil {
 			errorLog.Fatalln(err)
