@@ -5,7 +5,7 @@
 **`gamekit-coffeemachine`** is a gamification toolkit for the [Coffee Machine kata](https://simcap.github.io/coffee-machine/). It provides language-agnostic tools—a **Progress Runner** and a **CLI utility**—that communicate with kata implementations (in Java, C++, Python, etc.) via an inter-process text protocol over Unix pipes. The actual kata implementations live in a separate companion repository (`kata-coffeemachine`).
 
 - **Owner:** [Murex](https://github.com/murex)
-- **Language:** Go (1.25+)
+- **Language:** Go (1.26+)
 - **License:** MIT
 - **Module path:** `github.com/murex/gamekit-coffeemachine`
 
@@ -14,7 +14,7 @@
 ```
 gamekit-coffeemachine/
 ├── main.go                  # Entry point — launches the CLI runner (cli.Run)
-├── go.mod / go.sum          # Go module definition (Go 1.25, uses tool directives)
+├── go.mod / go.sum          # Go module definition (Go 1.26, uses tool directives)
 ├── Makefile                 # Build, test, lint, release targets
 ├── .goreleaser.yml          # GoReleaser v2 config for cross-platform releases
 ├── .golangci.yml            # Linter config (golangci-lint v2 with revive, gosec, etc.)
@@ -174,7 +174,7 @@ The project enforces strict linting via `golangci-lint` with the following notab
 
 Three GitHub Actions workflows run on push/PR:
 
-1. **`go.yml`** — Build and test on macOS, Ubuntu, and Windows (Go 1.25)
+1. **`go.yml`** — Build and test on macOS, Ubuntu, and Windows (Go 1.26)
 2. **`golangci_lint.yml`** — Lint checks
 3. **`go_releaser.yml`** — Cross-platform release (Linux/macOS/Windows, amd64/arm64)
 
