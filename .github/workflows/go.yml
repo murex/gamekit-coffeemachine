@@ -34,7 +34,7 @@ jobs:
           fetch-depth: 0
 
       - name: skip duplicate actions
-        uses: fkirc/skip-duplicate-actions@v5.3.1
+        uses: fkirc/skip-duplicate-actions@v5.3.2
 
       - name: set up Go
         uses: actions/setup-go@v7
