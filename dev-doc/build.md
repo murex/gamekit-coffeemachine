@@ -14,7 +14,7 @@ cd gamekit-coffeemachine
 
 The gamification kit is written in Go. This implies having Go compiler and tools installed on your machine.
 
-Simply follow the instructions provided [here](https://go.dev/). Make sure to install **Go version 1.26** or higher.
+Simply follow the instructions provided [here](https://go.dev/). Make sure to install **Go version 1.27** or higher.
 
 ## Install additional Go tools and utility packages
 
@@ -85,7 +85,7 @@ make
 This command generates all the gamification kit executables in the [bin](../bin) directory.
 
 | Executable                  | Description                                                                        |
-|-----------------------------|------------------------------------------------------------------------------------|
+| --------------------------- | ---------------------------------------------------------------------------------- |
 | `bin/progress-runner[.exe]` | Progress Runner executable. This is the test executable running all progress tests |
 | `bin/gotestsum[.exe]`       | gotestsum executable used for running and rendering go test results (*)            |
 | `bin/test2json[.exe]`       | go tool used for converting raw go test results into json (*)                      |
@@ -127,6 +127,7 @@ coffee machine implementation.
 ```shell
 ./bin/cli ../kata-coffeemachine/java
 ```
+
 ## Clean up generated files and directories
 
 ```shell

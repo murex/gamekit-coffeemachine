@@ -5,7 +5,7 @@
 **`gamekit-coffeemachine`** is a gamification toolkit for the [Coffee Machine kata](https://simcap.github.io/coffee-machine/). It provides language-agnostic tools—a **Progress Runner** and a **CLI utility**—that communicate with kata implementations (in Java, C++, Python, etc.) via an inter-process text protocol over Unix pipes. The actual kata implementations live in a separate companion repository (`kata-coffeemachine`).
 
 - **Owner:** [Murex](https://github.com/murex)
-- **Language:** Go (1.26+)
+- **Language:** Go (1.27+)
 - **License:** MIT
 - **Module path:** `github.com/murex/gamekit-coffeemachine`
 
@@ -14,7 +14,7 @@
 ```
 gamekit-coffeemachine/
 ├── main.go                  # Entry point — launches the CLI runner (cli.Run)
-├── go.mod / go.sum          # Go module definition (Go 1.26, uses tool directives)
+├── go.mod / go.sum          # Go module definition (Go 1.27, uses tool directives)
 ├── Makefile                 # Build, test, lint, release targets
 ├── .goreleaser.yml          # GoReleaser v2 config for cross-platform releases
 ├── .golangci.yml            # Linter config (golangci-lint v2 with revive, gosec, etc.)
@@ -83,15 +83,15 @@ Both tools communicate with kata implementations through a text-based protocol o
 
 **Protocol messages** (defined in `process/coffee_machine_message.go`):
 
-| Instruction      | Direction | Purpose                                    | Response type   |
-|------------------|-----------|--------------------------------------------|-----------------|
-| `iteration`      | →         | Query which iteration is implemented       | Single line     |
-| `restart`        | →         | Reset implementation state                 | Single line     |
-| `shutdown`       | →         | Terminate the implementation process       | Single line     |
-| `make-drink`     | →         | Request a drink instruction                | Single line     |
-| `print-report`   | →         | Request a sales report                     | Multi-line (ends with `END-OF-REPORT`)  |
-| `set-tank`       | →         | Set liquid tank status (empty/full)        | Single line     |
-| `dump-mailbox`   | →         | Dump notification mailbox                  | Multi-line (ends with `END-OF-MAILBOX`) |
+| Instruction    | Direction | Purpose                              | Response type                           |
+| -------------- | --------- | ------------------------------------ | --------------------------------------- |
+| `iteration`    | →         | Query which iteration is implemented | Single line                             |
+| `restart`      | →         | Reset implementation state           | Single line                             |
+| `shutdown`     | →         | Terminate the implementation process | Single line                             |
+| `make-drink`   | →         | Request a drink instruction          | Single line                             |
+| `print-report` | →         | Request a sales report               | Multi-line (ends with `END-OF-REPORT`)  |
+| `set-tank`     | →         | Set liquid tank status (empty/full)  | Single line                             |
+| `dump-mailbox` | →         | Dump notification mailbox            | Multi-line (ends with `END-OF-MAILBOX`) |
 
 The `process.P` struct manages the child process lifecycle and message exchange with a 5-second response timeout.
 
@@ -130,19 +130,19 @@ Contains domain constants shared across the codebase:
 
 All commands use the `Makefile`. The environment variable `CGO_ENABLED=0` is set globally.
 
-| Command            | Description                                                       |
-|--------------------|-------------------------------------------------------------------|
-| `make build`       | Builds all binaries into `bin/`: `cli`, `progress-runner`, `gotestsum`, `test2json` |
-| `make test`        | Runs all unit tests via `gotestsum`                               |
-| `make lint`        | Runs `golangci-lint` (config in `.golangci.yml`)                  |
-| `make modernize`   | Runs `gopls modernize` analysis                                   |
-| `make vet`         | Runs `go vet`                                                     |
-| `make tidy`        | Runs `go mod tidy`                                                |
-| `make deps`        | Updates all dependencies                                          |
-| `make prepare`     | Full pre-commit pipeline: deps → tidy → lint → modernize → build → test |
-| `make clean`       | Removes `bin/`, `dist/`, `_test_results/`                         |
-| `make release`     | Creates a release via GoReleaser                                  |
-| `make snapshot`    | Creates a snapshot release (no publish)                           |
+| Command          | Description                                                                         |
+| ---------------- | ----------------------------------------------------------------------------------- |
+| `make build`     | Builds all binaries into `bin/`: `cli`, `progress-runner`, `gotestsum`, `test2json` |
+| `make test`      | Runs all unit tests via `gotestsum`                                                 |
+| `make lint`      | Runs `golangci-lint` (config in `.golangci.yml`)                                    |
+| `make modernize` | Runs `gopls modernize` analysis                                                     |
+| `make vet`       | Runs `go vet`                                                                       |
+| `make tidy`      | Runs `go mod tidy`                                                                  |
+| `make deps`      | Updates all dependencies                                                            |
+| `make prepare`   | Full pre-commit pipeline: deps → tidy → lint → modernize → build → test             |
+| `make clean`     | Removes `bin/`, `dist/`, `_test_results/`                                           |
+| `make release`   | Creates a release via GoReleaser                                                    |
+| `make snapshot`  | Creates a snapshot release (no publish)                                             |
 
 ### Running Progress Tests Against an Implementation
 
@@ -174,7 +174,7 @@ The project enforces strict linting via `golangci-lint` with the following notab
 
 Three GitHub Actions workflows run on push/PR:
 
-1. **`go.yml`** — Build and test on macOS, Ubuntu, and Windows (Go 1.26)
+1. **`go.yml`** — Build and test on macOS, Ubuntu, and Windows (Go 1.27)
 2. **`golangci_lint.yml`** — Lint checks
 3. **`go_releaser.yml`** — Cross-platform release (Linux/macOS/Windows, amd64/arm64)
 
